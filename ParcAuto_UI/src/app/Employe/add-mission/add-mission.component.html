@@ -1,0 +1,93 @@
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <app-topbar></app-topbar>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="d-sm-flex flex-column  mb-4">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a (click)="goToHomePage()">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">ajouter mission</li>
+                        </ol>
+                    </nav>
+                    <h1 class="h3 mb-0 text-gray-800">Ajouter mission</h1>
+
+                </div>
+
+                <div class="card shadow mb-4">
+
+                    <form #myForm="ngForm" class="mission-form row g-3">
+                        <div class="col-md-5 form-group">
+                            <label for="dateDebut" class="form-label">dateDebut</label>
+                            <input type="date" [(ngModel)]="missionRequest.dateDebut" name="marque" class="form-control"
+                                id="dateDebut" required>
+                        </div>
+                        <div class="col-md-5 form-group">
+                            <label for="dateFin" class="form-label">dateFin</label>
+                            <input type="date" [(ngModel)]="missionRequest.dateFin" class="form-control" id="dateFin"
+                                name="dateFin" required>
+                        </div>
+                        <div class="col-md-5 form-group">
+                            <label for="lieuxDepart" class="form-label">lieux départ</label>
+                            <input type="text" [(ngModel)]="missionRequest.locationDebut" class="form-control"
+                                id="lieuxDepart" name="locationDebut" required>
+                        </div>
+                        <div class="col-md-5 form-group">
+                            <label for="lieuxFin" class="form-label">lieux fin</label>
+                            <input type="text" [(ngModel)]="missionRequest.locationFin" class="form-control"
+                                id="lieuxFin" name="locationFin" required>
+                        </div>
+                        <div *ngIf="(voitureData$ | async) as voitures" class="col-md-5 form-group">
+                            <label for="validationDefault04" class="form-label">Voiture</label>
+                            <select class="form-select" name="voitureId" [(ngModel)]="missionRequest.voitureId"
+                                id="validationDefault04" required>
+                                <option selected disabled>Choose...</option>
+                                <ng-container *ngFor="let voiture of voitures">
+                                    <option [value]="voiture.id">{{voiture.marque}}</option>
+
+                                </ng-container>
+
+
+                            </select>
+                        </div>
+                        <h4>Compagons</h4>
+                        <div class="col-md-4 ">
+                            <label for="compagon1" class="form-label ">copagnon1 </label>
+                            <input type="text" name="passenger1" [(ngModel)]="passenger1" class="form-control"
+                                id="compagon1">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="compagon2" class="form-label ">copagnon2</label>
+                            <input type="text" name="passenger2" [(ngModel)]="passenger2" class="form-control"
+                                id="compagon2">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="compagnon3" class="form-label ">copagnon3</label>
+                            <input type="text" name="passenger3" [(ngModel)]="passenger3" class="form-control"
+                                id="compagnon3">
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-block btn-primary" (click)="addMission()" type="submit">Ajouter
+                                mission</button>
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <app-topbar></app-topbar>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="d-sm-flex flex-column  mb-4">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a (click)="goToHomePage()">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">ajouter report</li>
+                        </ol>
+                    </nav>
+                    <h1 class="h3 mb-0 text-gray-800">Ajouter report</h1>
+
+                </div>
+
+                <div class="card shadow mb-4">
+
+                    <form #myForm="ngForm" class="report-form row g-3">
+                        <div class="col-md-5 form-group">
+                            <label for="subject" class="form-label">subject</label>
+                            <input type="text" [(ngModel)]="reportRequest.subject" name="marque" class="form-control"
+                                id="subject" required>
+                        </div>
+                        <div *ngIf="(voitureData$ | async) as voitures" class="col-md-5 form-group">
+                            <label for="validationDefault04" class="form-label">Voiture</label>
+                            <select class="form-select" name="voitureId" [(ngModel)]="reportRequest.voitureId"
+                                id="validationDefault04" required>
+                                <option selected disabled>Choose...</option>
+                                <ng-container *ngFor="let voiture of voitures">
+                                    <option [value]="voiture.id">{{voiture.marque}}</option>
+
+                                </ng-container>
+
+
+                            </select>
+                        </div>
+                        <div class="col-md-5 form-group">
+                            <label for="dateAccident" class="form-label">dateAccident</label>
+                            <input type="date" [(ngModel)]="reportRequest.dateAccident" class="form-control"
+                                id="dateAccident" name="dateAccident" required>
+                        </div>
+                        <div class="col-md-5 form-group">
+                            <label for="lieuxAccident" class="form-label">lieuxAccident</label>
+                            <input type="text" [(ngModel)]="reportRequest.lieuxAccident" class="form-control"
+                                id="lieuxAccident" name="lieuxAccident" required>
+                        </div>
+
+                        <div class="col-md-5 form-group">
+                            <label for="description" class="form-label">description</label>
+                            <textarea type="textarea" [(ngModel)]="reportRequest.description" class="form-control"
+                                id="description" name="description" required></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-block btn-primary" (click)="addReport()" type="submit">Ajouter
+                                incident</button>
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

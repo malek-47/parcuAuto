@@ -1,0 +1,133 @@
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <app-navbar></app-navbar>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <app-topbar></app-topbar>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="d-sm-flex flex-column  mb-4">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a (click)="goToVoiturePage()">List des voitrues</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">ajouter voiture</li>
+                        </ol>
+                    </nav>
+                    <h1 class="h3 mb-0 text-gray-800">Ajouter voiture</h1>
+
+                </div>
+
+                <div class="card shadow mb-4">
+
+                    <form #myForm="ngForm" (ngSubmit)="addVoiture(myForm)" ngSubmit class="voiture-form row g-3">
+                        <div class="col-md-4">
+                            <label for="validationDefault01" class="form-label">Marque</label>
+                            <input type="text" [(ngModel)]="voitureRequest.marque" name="marque" class="form-control"
+                                id="validationDefault01" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationDefault02" class="form-label">numMatricule</label>
+                            <input type="text" [(ngModel)]="voitureRequest.numMatricule" class="form-control"
+                                id="validationDefault02" name="numMatricule" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationDefault02" class="form-label">numChassis</label>
+                            <input type="text" [(ngModel)]="voitureRequest.numChassis" class="form-control"
+                                id="validationDefault02" name="numChassis" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationDefault02" class="form-label">model</label>
+                            <input type="text" [(ngModel)]="voitureRequest.model" class="form-control"
+                                id="validationDefault02" name="model" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationDefault04" class="form-label">Carburant</label>
+                            <select [(ngModel)]="voitureRequest.carburant" name="carburant" class="form-select"
+                                id="validationDefault04" required>
+                                <option disabled [value]="">Choose...</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="Essence">Essence</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationDefault04" class="form-label">port</label>
+                            <select [(ngModel)]="voitureRequest.portName" name="portName" class="form-select"
+                                id="validationDefault04" required>
+                                <option disabled [value]="">Choose...</option>
+                                <option value="bort sidi bousaid">bort sidi bousaid</option>
+                                <option value="bort rades">bort rades</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="validationDefault03" class="form-label">compteurKm</label>
+                            <input type="number" name="compteurKm" [(ngModel)]="voitureRequest.compteurKm"
+                                class="form-control" id="validationDefault03" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="validationDefault03" class="form-label">prochainVidange</label>
+                            <input type="number" name="prochainVidange" [(ngModel)]="voitureRequest.prochainVidange"
+                                class="form-control" id="validationDefault03" required>
+                        </div>
+
+
+
+                        <div class="col-md-5">
+                            <label for="validationDefaultUsername" class="form-label">assurance</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="inputGroupPrepend2"><i
+                                        class="bi bi-calendar3"></i></span>
+                                <input name="assurance" [(ngModel)]="voitureRequest.assurance" type="date"
+                                    class="form-control" id="validationDefaultUsername"
+                                    aria-describedby="inputGroupPrepend2" required>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="validationDefaultUsername" class="form-label">visiteTechnique</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="inputGroupPrepend2"><i
+                                        class="bi bi-calendar3"></i></span>
+                                <input name="visiteTechnique" [(ngModel)]="voitureRequest.visiteTechnique" type="date"
+                                    class="form-control" id="validationDefaultUsername"
+                                    aria-describedby="inputGroupPrepend2" required>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="validationDefaultUsername" class="form-label">carteGrise</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="inputGroupPrepend2"><i
+                                        class="bi bi-calendar3"></i></span>
+                                <input name="carteGrise" [(ngModel)]="voitureRequest.carteGrise" type="date"
+                                    class="form-control" id="validationDefaultUsername"
+                                    aria-describedby="inputGroupPrepend2" required>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="validationDefaultUsername" class="form-label">vignette</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="inputGroupPrepend2"><i
+                                        class="bi bi-calendar3"></i></span>
+                                <input name="vignette" [(ngModel)]="voitureRequest.vignette" type="date"
+                                    class="form-control" id="validationDefaultUsername"
+                                    aria-describedby="inputGroupPrepend2" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Ajouter</button>
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

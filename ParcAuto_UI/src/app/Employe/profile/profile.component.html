@@ -1,0 +1,121 @@
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <app-topbar></app-topbar>
+
+
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Profile</h1>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                </div>
+
+
+
+                <div *ngIf="(clientData$ | async) as client" class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                        class="rounded-circle" width="150">
+                                    <div class="mt-3">
+                                        <h4>{{username}}</h4>
+                                        <p class="text-secondary mb-1">{{client.fonction}}</p>
+                                        <p class="text-muted font-size-sm">{{client.email}}</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0"><i class="bi bi-journal-text px-2"></i>Missions</h6>
+                                    <span class="text-secondary">{{client.mesMissions.length}}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0"><i class="bi bi-exclamation-circle px-2"></i>Reports</h6>
+                                    <span class="text-secondary">{{client.mesReports.length}}</span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card shadow mb-4">
+
+                            <form *ngIf="(clientData$ | async) as client" class="client-form row g-3 m-3">
+                                <div class="col-md-4">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" [(ngModel)]="employeRequest.username"
+                                        id="username" name="username" [placeholder]="client.username" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="validationDefault01" class="form-label">First name</label>
+                                    <input type="text" class="form-control" [(ngModel)]="employeRequest.firstName"
+                                        id="validationDefault01" name="firstName" [placeholder]="client.firstName"
+                                        required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="validationDefault02" class="form-label">Last name</label>
+                                    <input type="text" class="form-control" [(ngModel)]="employeRequest.lastName"
+                                        id="validationDefault02" name="lastName" [placeholder]="client.lastName"
+                                        required>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <label for="validationDefaultUsername" class="form-label">Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                                        <input type="email" name="email" [placeholder]="client.email"
+                                            [(ngModel)]="employeRequest.email" class="form-control"
+                                            id="validationDefaultUsername" aria-describedby="inputGroupPrepend2"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="validationDefault04" class="form-label">fonction</label>
+                                    <select name="fonction" [(ngModel)]="employeRequest.fonction" class="form-select"
+                                        id="validationDefault04" required>
+                                        <option selected disabled>{{client.fonction}}
+                                        </option>
+                                        <option>Pdg</option>
+                                        <option>Chef</option>
+                                        <option>Employe</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="validationDefault03" class="form-label">Password</label>
+                                    <input type="password" name="password" [(ngModel)]="employeRequest.password"
+                                        class="form-control" id="validationDefault03" required>
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="btn btn-primary" (click)="updateClient()"
+                                        type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Button trigger modal -->

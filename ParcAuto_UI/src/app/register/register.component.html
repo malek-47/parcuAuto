@@ -1,0 +1,72 @@
+<div class="content-wrapper d-flex align-items-center auth px-0">
+    <div class="row w-100 mx-0">
+        <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                <div class="text-lg sidebar-brand d-flex align-items-center justify-content-center mb-4">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <h1> <i class="bi bi-car-front"></i> </h1>
+                    </div>
+                    <div class="sidebar-brand-text text-lg mx-3">
+                        <h1>ParcAuto</h1>
+                    </div>
+                </div>
+
+                <h6 class="font-weight-light">Ajouter un compte</h6>
+                <form #myForm="ngForm" ngSubmit (ngSubmit)="addClient(myForm)" class="client-form row g-3">
+                    <div class="col-md-4">
+                        <label for="validationDefault01" class="form-label">Username</label>
+                        <input type="text" class="form-control" [(ngModel)]="employeRequest.username"
+                            id="validationDefault01" name="username" value="Mark" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="validationDefault01" class="form-label">First name</label>
+                        <input type="text" class="form-control" [(ngModel)]="employeRequest.firstName"
+                            id="validationDefault01" name="firstname" value="Mark" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="validationDefault02" class="form-label">Last name</label>
+                        <input type="text" class="form-control" [(ngModel)]="employeRequest.lastName"
+                            id="validationDefault02" name="lastname" value="Otto" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="validationDefaultUsername" class="form-label">Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                            <input type="email" name="email" [(ngModel)]="employeRequest.email" class="form-control"
+                                id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationDefault04" class="form-label">fonction</label>
+                        <select name="fonction" [(ngModel)]="employeRequest.fonction" class="form-select"
+                            id="validationDefault04" required>
+                            <option selected disabled value="">Choose...</option>
+                            <option>Pdg</option>
+                            <option>Chef</option>
+                            <option>Employe</option>
+
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationDefault03" class="form-label">Password</label>
+                        <input type="password" name="password" [(ngModel)]="employeRequest.password"
+                            class="form-control" id="validationDefault03" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validation05" class="form-label">Confirm password</label>
+                        <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" class="form-control"
+                            id="validation05" required>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-block btn-primary" type="submit">Ajouter compte</button>
+                    </div>
+                </form>
+                <div class="text-center mt-4 font-weight-light">
+                    Already have account? <a (click)="goToLoginPage()" class="text-primary">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content-wrapper ends -->

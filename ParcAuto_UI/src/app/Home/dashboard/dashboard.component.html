@@ -1,0 +1,227 @@
+<div id="wrapper">
+    <!-- Sidebar -->
+    <app-navbar></app-navbar>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Topbar -->
+            <app-topbar></app-topbar>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Generate
+                        Report</a>
+                </div>
+
+                <!-- Content Row -->
+                <div *ngIf="(dashData$ | async) as dashData" class="row">
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-md-3 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body d-flex flex-column align-items-center">
+                                <div>
+                                    <i class="bi bi-newspaper h1"></i>
+                                </div>
+                                <div class="d-flex flex-column align-items-center">
+                                    <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
+                                        Nombre missions
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashData.numMission}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-4 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body d-flex flex-column align-items-center">
+                                <div>
+                                    <i class="bi bi-person-fill h1"></i>
+                                </div>
+                                <div class="d-flex flex-column align-items-center">
+                                    <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
+                                        Nombre client
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashData.numClient}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-4 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body d-flex flex-column align-items-center">
+                                <div>
+                                    <i class="bi bi-car-front-fill h1"></i>
+                                </div>
+                                <div class="d-flex flex-column align-items-center">
+                                    <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
+                                        Nombre voitures
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashData.numVoiture}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body d-flex flex-column align-items-center">
+                                <div>
+                                    <i class="bi bi-exclamation-diamond h1"></i>
+                                </div>
+                                <div class="d-flex flex-column align-items-center">
+                                    <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
+                                        Nombre reports
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashData.numReport}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Row -->
+
+                <div class="row">
+                    <!-- Area Chart -->
+                    <div class="col-xl-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">
+                                    Toutes les alertes
+                                </h6>
+                            </div>
+
+                            <!-- Card Body -->
+                            <div *ngIf="(dashData$ | async) as dashData" class="card-body">
+                                <!-- <div class="col-md-12 my-3">
+                                    <label for="validationDefaultUsername" class="form-label">specifiez une date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="inputGroupPrepend2"><i
+                                                class="bi bi-calendar3"></i></span>
+                                        <input type="date" class="form-control" id="validationDefaultUsername"
+                                            aria-describedby="inputGroupPrepend2" required>
+                                        <button class="btn btn-primary" type="submit">trouver</button>
+                                    </div>
+                                </div> -->
+
+                                <ul *ngFor="let alert of dashData.alerts" class="list-group">
+
+                                    <li
+                                        [ngClass]="{'list-group-item': true, 'list-group-item-danger': alert.alertType==='accident', 'list-group-item-warning': alert.alertType!=='accident'}">
+                                        {{alert.alertType}} dans {{alert.alertDate}}
+                                    </li>
+                                    <li class="list-group-item list-group-item-secondary">
+                                        Id: {{alert.voitureId}} | marque: {{alert.voitureInfo}}
+                                    </li>
+                                    <br />
+                                    <!-- secondary success danger warning info light dark -->
+
+
+                                    <!-- <li class="list-group-item list-group-item-warning">
+                                        Incident
+                                    </li>
+                                    <li class="list-group-item list-group-item-secondary">
+                                        Megane | 2024-02-12
+                                    </li>
+                                    <br /> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Voitures par port -->
+                    <div class="col-xl-3">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">
+                                    Nombre voitures par port
+                                </h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <ol *ngIf="(dashData$ | async) as dashData" class="list-group list-group-numbered">
+                                    <li *ngFor="let port of dashData.voitureParPort"
+                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">{{port[0]}}</div>
+
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">{{port[1]}}</span>
+                                    </li>
+
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 ">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">
+                                    Plus d'infos
+                                </h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div *ngIf="(dashData$ | async) as dashData" class="card-body">
+                                <ul class="list-group">
+                                    <h5 class="my-3 text-secondary">voitures</h5>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="fw-bold">Les voitures disponibles</div>
+                                        <span class="badge bg-success rounded-pill">{{dashData.voitureDispo}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="fw-bold">Les voitures indisponibles</div>
+                                        <span class="badge bg-danger rounded-pill">{{dashData.voitureIndispo}}</span>
+                                    </li>
+                                </ul>
+                                <ul class="list-group">
+                                    <h5 class="my-3 text-secondary">missions</h5>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="fw-bold">Les mission validé</div>
+                                        <span class="badge bg-success rounded-pill">{{dashData.missionV}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="fw-bold">Les mission encours</div>
+                                        <span class="badge bg-warning rounded-pill">{{dashData.missionE}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="fw-bold">Les mission refusé</div>
+                                        <span class="badge bg-danger rounded-pill">{{dashData.missionA}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Row -->
+
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>ParcAuto</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+</div>

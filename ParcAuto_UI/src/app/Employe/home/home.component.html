@@ -1,0 +1,278 @@
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <app-topbar></app-topbar>
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Home</h1>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">les voitures disponible</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table *ngIf="(voitureData$ | async) as voitures" id="example" datatable
+                                class="table table-striped text-nowrap" style="width:100%">
+                                <thead class="table-dark">
+                                    <tr>
+
+                                        <th>marque</th>
+                                        <th>model</th>
+                                        <th>numMatricule</th>
+                                        <th>carburant</th>
+                                        <th>numChassis</th>
+                                        <th>statusVoiture</th>
+                                        <th>compteurKm</th>
+                                        <th>accidenté</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let voiture of voitures">
+
+                                        <td><i class="bi bi-car-front-fill px-3 h5"></i>{{voiture.marque}}</td>
+                                        <td>{{voiture.model}}</td>
+                                        <td>{{voiture.numMatricule}}</td>
+                                        <td>{{voiture.carburant}}</td>
+                                        <td>{{voiture.numChassis}}</td>
+                                        <td><span *ngIf="voiture.statusVoiture==='disponible'"
+                                                class="badge badge-success rounded-pill d-inline">
+                                                {{voiture.statusVoiture}}</span>
+                                            <span *ngIf="voiture.statusVoiture==='indisponible'"
+                                                class="badge badge-warning rounded-pill d-inline">
+                                                {{voiture.statusVoiture}}</span>
+
+                                        </td>
+                                        <td>{{voiture.compteurKm}} KM</td>
+                                        <td>{{voiture.countAccident}}</td>
+                                    </tr>
+
+
+
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Mes missions</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table *ngIf="(missionData$ | async) as missions" id="example" datatable
+                                class="table table-striped" style="width:100%">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>id</th>
+                                        <th>voiture Id</th>
+                                        <th>conducteur</th>
+                                        <th>statusMission</th>
+                                        <th>dateDebut</th>
+                                        <th>dateFin</th>
+                                        <th>duree</th>
+                                        <th>Lieux depart</th>
+                                        <th>Lieux arrivage</th>
+                                        <th>Actions</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let mission of missions">
+                                        <td>{{mission.id}}</td>
+                                        <td> {{mission.voiture.id}} </td>
+                                        <td>{{mission.conducteur}}</td>
+                                        <td>
+                                            <span *ngIf="mission.statusMission ==='Validé'"
+                                                class="badge badge-success rounded-pill d-inline">{{mission.statusMission}}</span>
+                                            <span *ngIf="mission.statusMission ==='Encours'"
+                                                class="badge badge-warning rounded-pill d-inline">{{mission.statusMission}}</span>
+                                            <span *ngIf="mission.statusMission ==='Annulé'"
+                                                class="badge badge-danger rounded-pill d-inline">{{mission.statusMission}}</span>
+                                        </td>
+                                        <td>{{mission.dateDebut}}</td>
+                                        <td>{{mission.dateFin}}</td>
+                                        <td>{{mission.duree}}</td>
+                                        <td>{{mission.locationDebut}}</td>
+                                        <td>{{mission.locationFin}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
+                                                data-ripple-color="info "
+                                                (click)="showMissionModel('consommationModal',mission)">
+                                                <i class="bi bi-check2-circle h5"></i>
+                                            </button>
+
+
+                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
+                                                data-ripple-color="danger">
+                                                <i (click)="deleteMission(mission.id)" class="bi bi-x h5"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
+                                                data-ripple-color="danger"
+                                                (click)="showMissionModel('missionModel',mission)">
+                                                <i class="bi bi-file-earmark-text h5"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="text-primary">Mes incidents</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table *ngIf="(reportData$ | async) as reports" id="example" datatable
+                                    class="table table-striped  text-nowrap" style="width:100%">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>id</th>
+                                            <th>voiture Id</th>
+
+                                            <th>sujet</th>
+                                            <th>description</th>
+                                            <th>dateAccident</th>
+                                            <th>lieuxAccident</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let report of reports">
+                                            <td>{{report.id}}</td>
+                                            <td>{{report.voiture.id}}</td>
+
+                                            <td>{{report.sujet}}</td>
+                                            <td><button type="button" class="btn btn-link btn-sm px-3"
+                                                    data-mdb-ripple-init data-ripple-color="danger"
+                                                    (click)="showReportModel('descriptionModel', report.description)">
+                                                    <i class="bi bi-file-earmark-text h5"></i>
+
+                                                </button>{{report.description.slice(0,12)}}...</td>
+                                            <td>{{report.dateAccident}}</td>
+
+
+                                            <td>
+                                                {{report.lieuxAccident}}
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="missionModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Bilan mission</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="closeModel('missionModel')"></button>
+            </div>
+            <div class="modal-body">
+                <app-details-mission [mission]="missionDetails"></app-details-mission>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModel('missionModel')"
+                    data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="consommationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Consommation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="closeModel('consommationModal')"></button>
+            </div>
+            <div class="modal-body">
+                <form #myForm="ngForm" class="mission-form row g-3">
+                    <div class="col-md-4">
+                        <label for="kilometrage" class="form-label ">kilometrage</label>
+                        <input type="text" name="kilometrage" [(ngModel)]="consommation.kilometrage"
+                            class="form-control" id="kilometrage">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="gazoile" class="form-label ">gazoile</label>
+                        <input type="text" name="gazoile" [(ngModel)]="consommation.gazoile" class="form-control"
+                            id="gazoile">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="AjouterConsommation()"
+                            data-bs-dismiss="modal">Save</button>
+                        <button type="button" class="btn btn-secondary" (click)="closeModel('consommationModal')"
+                            data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="descriptionModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">description de l'Accident</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="closeModel('descriptionModel')"></button>
+            </div>
+            <div class="modal-body">
+                {{description}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModel('descriptionModel')"
+                    data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

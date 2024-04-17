@@ -28,6 +28,9 @@ public class OrdreMissionService {
     public OrdreMission getOrdreMission(Long missionId){
         return ordreMissionRepository.findById(missionId).orElseThrow(()-> new ObjectNotFoundException("Mission not found"));
     }
+    public long getMissionCount(){
+        return ordreMissionRepository.count();
+    }
 
     public List<OrdreMission> getAllMissions(){
         return ordreMissionRepository.findAll();

@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Employe {
+public class Employe extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -23,7 +23,10 @@ public class Employe {
     private String lastName;
     private String email;
     private Fonction fonction;
+    private String username;
     private String password;
+
+
 
     @OneToMany(mappedBy = "employe", cascade = CascadeType.ALL)
     private List<OrdreMission> mesMissions = new ArrayList<>();

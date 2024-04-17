@@ -1,17 +1,15 @@
-package com.example.ParcAuto.DTOs.Requests;
+package com.example.ParcAuto.Models;
 
-import com.example.ParcAuto.Enum.Fonction;
+import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@MappedSuperclass
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequest {
+public class User {
     private String username;
     private String password;
-
 }

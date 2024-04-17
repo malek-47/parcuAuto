@@ -30,6 +30,9 @@ public class ReportController {
     @GetMapping("/employe/{id}")
     public List<Report> getReportsEmploye(@PathVariable Long id) {return reportService.getReportEmplyes(id);}
 
+    @GetMapping("/voiture/{id}")
+    public List<Report> getReportsVoiture(@PathVariable Long id) {return reportService.getReportVoitures(id);}
+
     @PostMapping("/employe/{id}")
     public ResponseEntity<Report> addReport(@PathVariable Long id, @RequestBody ReportRequest request){
         return ResponseEntity.ok(reportService.addReport(id, request));

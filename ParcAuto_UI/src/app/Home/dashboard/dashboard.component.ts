@@ -21,6 +21,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.dashData$ = this.fetchDashData();
+    this.dashData$.subscribe({
+      next: res => {
+        this.dashData = res
+      }
+    })
   }
 
 

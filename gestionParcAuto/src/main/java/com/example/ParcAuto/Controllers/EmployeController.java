@@ -1,5 +1,7 @@
 package com.example.ParcAuto.Controllers;
 
+import com.example.ParcAuto.DTOs.Requests.LoginRequest;
+import com.example.ParcAuto.DTOs.Requests.LoginResponse;
 import com.example.ParcAuto.DTOs.Requests.RegisterRequest;
 import com.example.ParcAuto.Models.Employe;
 import com.example.ParcAuto.Services.EmployeService;
@@ -23,7 +25,10 @@ public class EmployeController {
     @GetMapping("/{id}")
     public Employe getEmploye(@PathVariable Long id) {return employeService.getEmploye(id);}
 
-
+    @PostMapping("/login")
+    public LoginResponse Login(@RequestBody LoginRequest request){
+        return employeService.login(request);
+    }
     @PostMapping
     public ResponseEntity<Employe> addEmploye(@RequestBody RegisterRequest request){
         return ResponseEntity.ok(employeService.addEmploye(request));

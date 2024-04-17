@@ -1,5 +1,6 @@
 package com.example.ParcAuto.Controllers;
 
+import com.example.ParcAuto.DTOs.Requests.AlerteResponse;
 import com.example.ParcAuto.DTOs.Requests.VoitureRequest;
 import com.example.ParcAuto.Models.Voiture;
 import com.example.ParcAuto.Services.VoitureService;
@@ -43,6 +44,8 @@ public class VoitureController {
         return voitureService.getVoituresIndisponible();
     }
 
+
+
     @PostMapping
     public Voiture addVoiture(@RequestBody VoitureRequest request){
         return voitureService.addVoiture(request);
@@ -51,6 +54,14 @@ public class VoitureController {
     @PutMapping("/{id}")
     public Voiture updateVoiture(@PathVariable Long id,@RequestBody VoitureRequest request){
         return voitureService.updateVoiture(id,request);
+    }
+    @PutMapping("/{id}/dispo")
+    public Voiture updateVoitureDispo(@PathVariable Long id){
+        return voitureService.updateVoitureDispo(id);
+    }
+    @PutMapping("/{id}/indispo")
+    public Voiture updateVoitureIndispo(@PathVariable Long id){
+        return voitureService.updateVoitureIndispo(id);
     }
 
     @DeleteMapping("/{id}")

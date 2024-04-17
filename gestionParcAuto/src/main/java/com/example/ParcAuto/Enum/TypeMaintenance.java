@@ -1,5 +1,5 @@
 package com.example.ParcAuto.Enum;
 
 public enum TypeMaintenance {
-    Vidange, Accident
+    Vidange, Lavage, Assurance, VisiteTechnique
 }

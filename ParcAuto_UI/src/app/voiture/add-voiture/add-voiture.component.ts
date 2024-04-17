@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { Observable } from 'rxjs';
 import { Voiture } from 'src/app/_Models/voiture';
 import { CommonService } from 'src/app/_Services/common.service';
 
@@ -50,4 +51,6 @@ export class AddVoitureComponent {
   goToVoiturePage(){
     this.router.navigate(['admin/voitures']);
   }
+
+  
 }

@@ -1,6 +1,7 @@
 package com.example.ParcAuto.Models;
 
 import com.example.ParcAuto.Enum.TypeMaintenance;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -24,10 +26,12 @@ public class Maintenance {
     private TypeMaintenance type;
     private String duree;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateMaintenance;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dateMaintenance;
+
+    //new
+    private String frais;
 
     @ManyToOne
-    @JsonIgnore
     private Voiture voiture;
 }
